@@ -2,8 +2,8 @@ import requests
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters
 
-HF_TOKEN = "hf_xxxxxxx"  # твой токен
-BOT_TOKEN = "xxxxxxx"    # токен от @BotFather
+HF_TOKEN = "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" 
+BOT_TOKEN = "8988974276:AAE5M0Lhg6e4ZNlFxF7Lyi9KuvEuwBRP6sU"  
 
 def generate(prompt):
     url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
