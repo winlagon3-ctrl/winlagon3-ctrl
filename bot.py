@@ -7,17 +7,17 @@ HF_TOKEN = "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"
 BOT_TOKEN = "8988974276:AAE5M0Lhg6e4ZNlFxF7Lyi9KuvEuwBRP6sU"
 
 def generate(prompt):
-url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+    url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     
-    for i in range(5):  # 5 попыток
+    for i in range(5):
         r = requests.post(url, headers=headers, json={"inputs": prompt})
+        
+        print(f"Попытка {i+1}: статус {r.status_code}, ответ: {r.text[:200]}")
         
         if r.headers.get("Content-Type", "").startswith("image"):
             return r.content
         
-        # Модель грузится — ждём
-        print(f"Попытка {i+1}: {r.text}")
         time.sleep(10)
     
     return None
