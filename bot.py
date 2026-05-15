@@ -14,7 +14,7 @@ def generate(prompt):
     try:
         image = client.text_to_image(
             prompt,
-            model="black-forest-labs/FLUX.1-dev"
+            model="black-forest-labs/FLUX.1-schnell"
         )
         buf = io.BytesIO()
         image.save(buf, format="PNG")
