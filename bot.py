@@ -1,29 +1,28 @@
-import requests
 import time
 import os
+import io
+from huggingface_hub import InferenceClient
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters
 
 HF_TOKEN = os.environ.get("HF_TOKEN")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
-print(f"BOT_TOKEN загружен: {bool(BOT_TOKEN)}")
-print(f"HF_TOKEN загружен: {bool(HF_TOKEN)}")
+client = InferenceClient(api_key=HF_TOKEN)
 
 def generate(prompt):
-    url = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-dev"
-    headers = {"Authorization": f"Bearer {HF_TOKEN}"}
-    
-    for i in range(5):
-        r = requests.post(url, headers=headers, json={"inputs": prompt})
-        print(f"Попытка {i+1}: статус {r.status_code}, ответ: {r.text[:200]}")
-        
-        if r.headers.get("Content-Type", "").startswith("image"):
-            return r.content
-        
-        time.sleep(15)
-    
-    return None
+    try:
+        image = client.text_to_image(
+            prompt,
+            model="black-forest-labs/FLUX.1-schnell"
+        )
+        buf = io.BytesIO()
+        image.save(buf, format="PNG")
+        buf.seek(0)
+        return buf
+    except Exception as e:
+        print(f"Ошибка генерации: {e}")
+        return None
 
 async def start(update: Update, context):
     await update.message.reply_text("Привет! Напиши промпт на английском.")
