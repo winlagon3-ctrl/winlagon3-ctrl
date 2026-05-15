@@ -5,8 +5,8 @@ import telegram
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters
 
-HF_TOKEN = "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"
-BOT_TOKEN = "8988974276:AAHXyLtOBwrby3aDXgLP_wgxpSf9sDm09hc"
+HF_TOKEN = "HF_TOKEN"
+BOT_TOKEN = "BOT_TOKEN"
 
 async def clear_webhook():
     bot = telegram.Bot(BOT_TOKEN)
