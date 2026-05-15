@@ -11,7 +11,7 @@ print(f"BOT_TOKEN загружен: {bool(BOT_TOKEN)}")
 print(f"HF_TOKEN загружен: {bool(HF_TOKEN)}")
 
 def generate(prompt):
-    url = "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-2-1"
+    url = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-dev"
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     
     for i in range(5):
