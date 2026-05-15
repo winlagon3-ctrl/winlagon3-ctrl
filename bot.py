@@ -7,7 +7,7 @@ HF_TOKEN = "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"
 BOT_TOKEN = "8988974276:AAE5M0Lhg6e4ZNlFxF7Lyi9KuvEuwBRP6sU"
 
 def generate(prompt):
-    url = "https://api-inference.huggingface.co/v1/models/stabilityai/stable-diffusion-xl-base-1.0"
+    url = "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5"
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     
     for i in range(5):
