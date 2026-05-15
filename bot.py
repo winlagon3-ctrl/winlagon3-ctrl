@@ -16,7 +16,7 @@ async def clear_webhook():
 asyncio.get_event_loop().run_until_complete(clear_webhook())
 
 def generate(prompt):
-    url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
+    url = "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-2-1"
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     
     for i in range(5):
