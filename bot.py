@@ -1,10 +1,19 @@
 import requests
 import time
+import asyncio
+import telegram
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters
 
 HF_TOKEN = "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"
 BOT_TOKEN = "8988974276:AAE5M0Lhg6e4ZNlFxF7Lyi9KuvEuwBRP6sU"
+
+async def clear_webhook():
+    bot = telegram.Bot(BOT_TOKEN)
+    await bot.delete_webhook(drop_pending_updates=True)
+    await bot.close()
+
+asyncio.get_event_loop().run_until_complete(clear_webhook())
 
 def generate(prompt):
     url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
@@ -12,13 +21,12 @@ def generate(prompt):
     
     for i in range(5):
         r = requests.post(url, headers=headers, json={"inputs": prompt})
-        
         print(f"Попытка {i+1}: статус {r.status_code}, ответ: {r.text[:200]}")
         
         if r.headers.get("Content-Type", "").startswith("image"):
             return r.content
         
-        time.sleep(10)
+        time.sleep(15)
     
     return None
 
